@@ -1,6 +1,5 @@
 server:
-  use-forward-headers: true
-  contextPath: /
+  forward-headers-strategy: native
   compression:
     enabled: true
     mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
@@ -8,7 +7,6 @@ server:
   http2:
     enabled: true
 springdoc:
-  version: 3
   api-docs:
     enabled: true
     path: /v3/api-docs

@@ -15,5 +15,12 @@
         }
     ],
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.home": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
+    "maven.terminal.customEnv": [
+        {
+            "environmentVariable": "JAVA_HOME",
+            "value": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1"
+        }
+    ]
 }

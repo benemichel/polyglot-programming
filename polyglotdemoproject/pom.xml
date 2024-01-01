@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.5</version>
+		<version>3.2.1</version>
 		<relativePath/>
 	</parent>
 
@@ -20,7 +20,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <java.version>21</java.version>
-        <graalvm.version>22.3.3</graalvm.version>
+        <graalvm.version>23.1.1</graalvm.version>
     </properties>
 
     <dependencies>
@@ -59,7 +59,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.graalvm.polyglot</groupId>
-			<artifactId>python-community</artifactId>
+			<artifactId>python</artifactId>
 			<version>23.1.1</version>
 			<scope>runtime</scope>
 			<type>pom</type>

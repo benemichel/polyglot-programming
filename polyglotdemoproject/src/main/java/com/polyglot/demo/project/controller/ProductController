@@ -1,0 +1,20 @@
+package com.polyglot.demo.project.controller;
+
+@RestController
+@RequestMapping(value = "/product")
+public class DemoController {
+
+    @Operation(summary="Rate a product")
+    @GetMapping("/rate")
+    String rateProduct() {
+        try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
+            context.initialize("python");
+            Value value = context.eval("python", "4 + 6");
+            BigInteger valueInt = value.asBigInteger();
+            return valueInt.toString();
+        } catch (Exception e) {
+            return e.toString();
+        }
+    }
+
+}

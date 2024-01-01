@@ -1,0 +1,19 @@
+{
+    "graalvm.home": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
+    "graalvm.installations": [
+        "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1"
+    ],
+    "terminal.integrated.env.linux": {
+        "GRAALVM_HOME": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1"
+    },
+    "java.jdt.ls.java.home": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
+            "default": true
+        }
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

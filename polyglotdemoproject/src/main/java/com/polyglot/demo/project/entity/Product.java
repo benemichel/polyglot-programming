@@ -2,9 +2,14 @@ package com.polyglot.demo.project.entity;
 
 public class Product {
     private int rating;
+    private String ean13;
+    private String name;
+    private float netPrice;
 
-     public Product() {
-        rating = 0;
+     public Product(String ean, String name) {
+        this.name = name;
+        this.ean13 = ean;
+        this.rating = 0;
     }
 
     public int getRating() {
@@ -15,4 +20,7 @@ public class Product {
         this.rating = rating;
     }
     
+    public String getName() {
+        return name;
+    }
 }

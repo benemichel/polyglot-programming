@@ -37,8 +37,11 @@ public class JavaAccessPythonDemoController {
         this.resourceLoader = resourceLoader;
     }
 
-    @Operation(summary = "cast python object to Java interface and call static method")
-    @GetMapping("/cast-and-use-static-method")
+    /**
+     * checked: 04.03.2024
+     */
+    @Operation(summary = "cast python class to Java interface and call static method (ClassB)")
+    @GetMapping("/cast-and-call-static-method")
     String castPythonObjectToJavaInterfaceAndCallStaticMethod() {
         try (Context context = Context.newBuilder("python").allowAllAccess(true).build()) {
             Source source = Source
@@ -47,19 +50,22 @@ public class JavaAccessPythonDemoController {
             context.eval(source);
 
             Value classB = context.getBindings("python").getMember("ClassB");
-            InterfaceB interfaceAImplementation = classB.as(InterfaceB.class);
-            interfaceAImplementation.add();
+            InterfaceB interfaceB = classB.as(InterfaceB.class);
+            int result = interfaceB.add(4, 15);
 
-            return String.valueOf(99);
+            return String.valueOf(result);
         } catch (Exception e) {
             return e.toString();
         }
     }
 
-    @Operation(summary = "cast python object to Java interface")
+    /**
+     * checked: 04.03.2024
+     */
+    @Operation(summary = "instantiate python class and cast to Java interface and call method (ClassA)")
     @GetMapping("/cast-to-java-interface")
     String castPythonObjectToJavaInterface() {
-        try (Context context = Context.create()) {
+        try (Context context = Context.newBuilder("python").allowAllAccess(true).build()) {
             Source source = Source
             .newBuilder("python", resourceLoader.getResource(pythonPath + "/ClassA.py").getFile()
             ).build();
@@ -67,7 +73,7 @@ public class JavaAccessPythonDemoController {
 
             Value classA = context.getBindings("python").getMember("ClassA");
             InterfaceA interfaceAImplementation = classA.newInstance().as(InterfaceA.class);
-            int result = interfaceAImplementation.add(2,3);
+            int result = interfaceAImplementation.sum();
 
             return String.valueOf(result);
         } catch (Exception e) {
@@ -76,7 +82,7 @@ public class JavaAccessPythonDemoController {
     }
 
 
-    @Operation(summary = "linear regression interface")
+    @Operation(summary = "implement service in python (linear regression)")
     @GetMapping("/linear-regression-interface")
     String linearRegressionInterface() {
         try (Context context = Context.newBuilder("python").allowAllAccess(true).build()) {

@@ -2,7 +2,7 @@ package com.polyglot.demo.project.interfaces;
 
 
 public interface InterfaceB {
-    void add();
+    public int add(int a, int b);
 
     void pythonConstructor();
 }

@@ -1,4 +1,3 @@
 class LinearRegressionImpl:
-   @staticmethod
-   def compute() -> int:
+   def compute(self) -> int:
       return 2

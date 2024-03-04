@@ -1,3 +1,6 @@
 class ClassA:
-    def add(a, b) -> int:
-        return a + b
+    a: int = 2
+    b: int = 3
+
+    def sum(self) -> int:
+        return self.a + self.b

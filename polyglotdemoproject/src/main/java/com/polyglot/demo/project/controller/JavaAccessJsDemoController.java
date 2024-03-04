@@ -83,23 +83,20 @@ public class JavaAccessJsDemoController {
         }
     }
 
-    @Operation(summary = "cast js object to Java abstract class")
-    @GetMapping("/cast-js-object-to-java-class")
-    String castJsObjectToJavClass() {
+    /**
+     * checked: 04.03.2024
+     */
+    @Operation(summary = "throws PolyglotException")
+    @GetMapping("/throw-polyglot-exception")
+    String throwPolyglotException() {
         try (Context context = Context.create()) {
-            Source source = Source
-            .newBuilder("js", resourceLoader.getResource(jsPath + "/objectA.js").getFile()
-            ).build();
-
-            Value object = context.eval(source);
-            AbstractClassA objectA = object.as(AbstractClassA.class);
-            int result = objectA.add(2, 5);
-
-            return String.valueOf(result);
+            context.eval("js", "fooObject.value");
+            return "";
         } catch (Exception e) {
             return e.toString();
         }
     }
+
 
     @Operation(summary = "test debugging")
     @GetMapping("/test-debugging")

@@ -1,4 +1,4 @@
 class ClassB:
     @staticmethod
-    def add() -> None:
-        return 42
+    def add(a: int, b: int) -> int:
+        return a + b

@@ -1,23 +1,23 @@
 package com.polyglot.demo.project.classes;
 
 public class Rectangle {
-    private float x;
-    private float y;
+    private double x;
+    private double y;
 
-    public Rectangle(float x, float y) {
+    public Rectangle(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public float getArea() {
+    public double getArea() {
         return x * y;
     }
 

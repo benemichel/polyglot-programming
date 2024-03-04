@@ -69,4 +69,23 @@ public class PythonAccessJavaDemoController {
             return e.toString();
         }
     }
+
+     /**
+     * checked: 04.03.2024
+     */
+    @Operation(summary = "call js")
+    @GetMapping("/call-js")
+    String callJavaScript() {
+        try (Context context = Context.newBuilder("python", "js").allowAllAccess(true).build()) {
+            Source source = Source
+            .newBuilder("python", resourceLoader.getResource(pythonPath + "/CallJavaScript.py").getFile()
+            ).build();
+            Value result = context.eval(source);
+            int resultInt = result.asInt();
+
+            return String.valueOf(resultInt);
+        } catch (Exception e) {
+            return e.toString();
+        }
+    }
 }

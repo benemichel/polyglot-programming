@@ -65,6 +65,12 @@
 			<type>pom</type>
 		</dependency>
 		<dependency>
+			<groupId>org.graalvm.polyglot</groupId>
+			<artifactId>js</artifactId>
+			<version>23.1.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-core</artifactId>
 			<version>2.3-groovy-4.0</version>
@@ -87,6 +93,21 @@
 
     
 	<build>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/javascript</directory>
+				<includes>
+                    <include>*.js</include>
+                </includes>
+			</resource> 
+			<resource>
+				<directory>${project.basedir}/src/main/python</directory>
+				<includes>
+                    <include>*.py</include>
+                </includes>
+			</resource> 
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

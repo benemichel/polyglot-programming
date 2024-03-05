@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 
+import com.polyglot.demo.project.classes.PromiseExecutor;
 import com.polyglot.demo.project.interfaces.AbstractClassA;
 
-import java.util.function.Function;
+
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
@@ -18,8 +21,8 @@ import org.graalvm.polyglot.Value;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
-import java.net.URL;
+
+
 
 @RestController
 @RequestMapping("/java-js-demo")
@@ -110,6 +113,25 @@ public class JavaAccessJsDemoController {
             int resultInt = result.asInt();
 
             return String.valueOf(resultInt);
+        } catch (Exception e) {
+            return e.toString();
+        }
+    }
+
+
+        /**
+     * checked: 05.03.2024
+     */
+    @Operation(summary = "execute promise")
+    @GetMapping("/execute-promise")
+    String promiseExecutor() {
+        try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
+          
+            Value jsPromise = context.eval("js", "Promise.resolve(42);");
+            Consumer<Object> then = (val) -> System.out.println("Resolved: " + val);
+            jsPromise.invokeMember("then", then);
+
+            return "see terminal output";
         } catch (Exception e) {
             return e.toString();
         }

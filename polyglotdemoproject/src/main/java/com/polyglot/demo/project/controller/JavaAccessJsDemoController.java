@@ -119,7 +119,7 @@ public class JavaAccessJsDemoController {
     }
 
 
-        /**
+    /**
      * checked: 05.03.2024
      */
     @Operation(summary = "execute promise")
@@ -127,10 +127,39 @@ public class JavaAccessJsDemoController {
     String promiseExecutor() {
         try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
           
-            Value jsPromise = context.eval("js", "Promise.resolve(42);");
+            Value promise = context.eval("js", "Promise.resolve(42);");
             Consumer<Object> then = (val) -> System.out.println("Resolved: " + val);
-            jsPromise.invokeMember("then", then);
+            promise.invokeMember("then", then);
 
+            return "see terminal output";
+        } catch (Exception e) {
+            return e.toString();
+        }
+    }
+
+        /**
+     * checked: 05.03.2024
+     */
+    @Operation(summary = "multiple-contexts-multiple-threads")
+    @GetMapping("/multiple-contexts-multiple-threads")
+    String multipleContextsMultipleThreads() {
+        try (Context context1 = Context.newBuilder().allowAllAccess(true).build();
+             Context context2 = Context.newBuilder().allowAllAccess(true).build() ) {
+          
+            Thread thread = new Thread(() -> {
+                for (int i = 0; i < 10; i++) {
+                    context1.eval("js", "console.log('context 1')");
+                }
+            });
+
+            thread.start();
+
+            for (int i = 0; i < 10; i++) {
+                context2.eval("js", "console.log('context 2')");
+            }
+           
+            thread.join();
+            
             return "see terminal output";
         } catch (Exception e) {
             return e.toString();

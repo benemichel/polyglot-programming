@@ -71,17 +71,17 @@
 			<type>pom</type>
 		</dependency>
 		<dependency>
+			<groupId>org.graalvm.polyglot</groupId>
+			<artifactId>llvm</artifactId>
+			<version>23.1.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-core</artifactId>
 			<version>2.3-groovy-4.0</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.1</version>
-            <scope>test</scope>
-        </dependency>
 		<dependency>
 			<groupId>org.apache.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
@@ -106,6 +106,13 @@
                     <include>*.py</include>
                 </includes>
 			</resource> 
+			<resource>
+				<directory>${project.basedir}/src/main/c</directory>
+				<includes>
+                    <include>*.so</include>
+					<include>*.c</include>
+                </includes>
+			</resource> 
 		</resources>
 
 		<plugins>
@@ -121,7 +128,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>compile</goal>
+							<!-- <goal>compile</goal> -->
 							<goal>compileTests</goal>
 						</goals>
 					</execution>
@@ -138,16 +145,26 @@
            		</configuration>
 			</plugin>
 			<plugin>
-			<!-- ensure Maven’s test runner executes files ending in *Spec -->
+			<!-- ensure Maven’s test runner executes files ending in *Spec 
+				Surefire plugin is called implicitly by the Maven life cycle whenever the test goal is executed
+				-->
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.2</version>
 				<configuration>
-					<testSourceDirectory>src/test/groovy</testSourceDirectory>
+					<testSourceDirectory>${project.basedir}/src/test/</testSourceDirectory>
                 	<includes>
-                   	 <include>**/*Spec.groovy</include>
-                   	 <include>**/*Test.groovy</include>
+                   		 <include>groovy/**/*Spec.groovy</include>
+						 <include>java/**/Test*.java</include>
                 	</includes>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.jupiter</groupId>
+						<artifactId>junit-jupiter-engine</artifactId>
+						<version>5.9.1</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 		

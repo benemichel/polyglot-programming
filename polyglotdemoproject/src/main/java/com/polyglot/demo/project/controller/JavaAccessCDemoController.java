@@ -21,6 +21,7 @@ import org.graalvm.polyglot.Value;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 
 
 
@@ -43,6 +44,9 @@ public class JavaAccessCDemoController {
     @GetMapping("/addition")
     String rateProduct() {
         try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
+
+            URL url = this.getClass().getResource("/MultiInheritance.python");
+            File file = new File(url.getFile());
 
             Source source = Source
             .newBuilder("llvm", resourceLoader.getResource(cPath + "/struct.so").getFile()

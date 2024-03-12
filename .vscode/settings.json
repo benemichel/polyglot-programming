@@ -22,5 +22,7 @@
             "environmentVariable": "JAVA_HOME",
             "value": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1"
         }
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable"
 }

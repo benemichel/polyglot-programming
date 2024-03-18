@@ -12,9 +12,6 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 
-import org.graalvm.polyglot.Value;
-import org.graalvm.polyglot.Context;
-
 @SpringBootApplication
 public class PolyglotDemoProject {
 

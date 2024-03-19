@@ -1,21 +1,18 @@
 import org.junit.jupiter.api.Test;
 
-import com.polyglot.demo.project.classes.JavaArray;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import java.util.ArrayList;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.PolyglotException;
-import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
+import org.graalvm.polyglot.proxy.ProxyArray;
 
 public class PassProxiesTest {
 
@@ -55,6 +52,24 @@ public class PassProxiesTest {
         });
 
         assertTrue(exception.isGuestException());
+    }
+
+    class JavaArray implements ProxyArray {
+        private final ArrayList<Integer> delegate;
+     
+        public JavaArray(ArrayList<Integer> delegate) {
+            this.delegate = delegate;
+        }
+    
+        public Object get(long index) {
+            return delegate.get((int) index);
+        }
+        public void set(long index, Value value) {
+            throw new UnsupportedOperationException();
+        }
+        public long getSize() {
+            return delegate.size();
+        }
     }
 
     @AfterEach

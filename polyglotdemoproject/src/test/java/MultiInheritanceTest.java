@@ -9,11 +9,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.polyglot.demo.project.interfaces.AbstractPythonC;
+
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
-
-import com.polyglot.demo.project.interfaces.AbstractPythonC;
 
 
 public class MultiInheritanceTest {
@@ -41,6 +41,9 @@ public class MultiInheritanceTest {
         assertEquals("class A", abstractC.print());
         assertNotEquals("class B", abstractC.print());
     }
+
+    
+    
 
     @AfterEach
     public void tearDown() {

@@ -25,3 +25,15 @@ pip -V
 # run tests
 mvn -Dtest=UserTest clean test
 [] run all tests with mvn test
+
+
+# Docker
+
+To check the version of GraalVM and its installed location, run the env command from the Bash prompt:
+
+ ``env``
+The output shows the environment variable JAVA_HOME pointing to the installed GraalVM version and location.
+
+To check the Java version, run:
+
+ ``java -version``

@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.graalvm.polyglot.Context;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.polyglot.demo.project.entity.Product;
 import com.polyglot.demo.project.enums.ProductCategories;
+import com.polyglot.demo.project.service.ImportService;
 import com.polyglot.demo.project.service.RecommendationService;
 
 import groovy.lang.GroovyObject;
@@ -57,19 +60,35 @@ public class ProductController {
         return recommendedProduct.getName();
     }
 
-
-    @Operation(summary = "Rate a product")
-    @GetMapping("/rate")
-    String rateProduct() {
+    @Operation(summary = "Find products in import file")
+    @GetMapping("/find-in-file")
+    String findInImportFile(ImportService importService) {
         try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
-            Value value = context.eval("python", "4 + 6");
-            int valueInt = value.asInt();
-            return String.valueOf(valueInt);
-        } catch (Exception e) {
-            return e.toString();
 
+            String filePath = "products.txt";
+            String content = Files.readString(Paths.get(filePath));
+            
+            String fileContent = content;
+            return importService.find_ean(fileContent);
+        } catch (Exception exception) {
+            return (exception.toString());
         }
+
     }
+
+
+    // @Operation(summary = "Rate a product")
+    // @GetMapping("/rate")
+    // String rateProduct() {
+    //     try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
+    //         Value value = context.eval("python", "4 + 6");
+    //         int valueInt = value.asInt();
+    //         return String.valueOf(valueInt);
+    //     } catch (Exception e) {
+    //         return e.toString();
+
+    //     }
+    // }
 
     @Operation(summary = "Export a product as XML file")
     @GetMapping("/export")
@@ -79,11 +98,9 @@ public class ProductController {
         Product product = new Product("4006381333934", "Example Product", ProductCategories.CLOTHES);
 
         try {
-         
-        
-            String[] roots = new String[] { "src/main" };
+            String[] roots = new String[] { "src/main/groovy" };
             GroovyScriptEngine gse = new GroovyScriptEngine(roots);
-            Class<GroovyObject> productExportServiceClass = gse.loadScriptByName("groovy/ProductExportService.groovy");
+            Class<GroovyObject> productExportServiceClass = gse.loadScriptByName("/ProductExportService.groovy");
             GroovyObject productExportService = productExportServiceClass.getDeclaredConstructor().newInstance();
 
             Object xml = productExportService.invokeMethod("createXml", product);

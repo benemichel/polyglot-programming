@@ -1,10 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import com.polyglot.demo.project.classes.PromiseExecutor;
-import com.polyglot.demo.project.classes.Triangle;
-import com.polyglot.demo.project.interfaces.InterfaceA;
-import com.polyglot.demo.project.interfaces.InterfaceB;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.Assert.assertEquals;

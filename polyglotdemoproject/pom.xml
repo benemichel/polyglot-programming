@@ -71,6 +71,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.graalvm.polyglot</groupId>
+			<artifactId>ruby</artifactId>
+			<version>23.1.1</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.graalvm.polyglot</groupId>
 			<artifactId>llvm</artifactId>
 			<version>23.1.1</version>
 			<type>pom</type>
@@ -95,31 +101,24 @@
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/javascript</directory>
-				<includes>
-                    <include>*.js</include>
-                </includes>
 			</resource> 
 			<resource>
 				<directory>${project.basedir}/src/main/python</directory>
-				<includes>
-                    <include>*.py</include>
-                </includes>
 			</resource> 
 			<resource>
 				<directory>${project.basedir}/src/main/c</directory>
-				<includes>
-                    <include>*.so</include>
-					<include>*.c</include>
-                </includes>
+			</resource> 
+			<resource>
+				<directory>${project.basedir}/src/main/ruby</directory>
 			</resource> 
 		</resources>
 
-		<plugins>
+		<!-- <plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- enables maven to compile Groovy code -->
+			< enables maven to compile Groovy code >
 			<plugin>
 				<groupId>org.codehaus.gmavenplus</groupId>
 				<artifactId>gmavenplus-plugin</artifactId>
@@ -127,7 +126,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<!-- <goal>compile</goal> -->
+							< <goal>compile</goal> >
 							<goal>compileTests</goal>
 						</goals>
 					</execution>
@@ -144,9 +143,9 @@
            		</configuration>
 			</plugin>
 			<plugin>
-			<!-- ensure Maven’s test runner executes files ending in *Spec 
+			< ensure Maven’s test runner executes files ending in *Spec 
 				Surefire plugin is called implicitly by the Maven life cycle whenever the test goal is executed
-				-->
+				>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.2</version>
@@ -165,7 +164,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-		</plugins>
+		</plugins> -->
 		
 	</build>
 

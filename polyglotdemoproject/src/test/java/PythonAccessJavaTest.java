@@ -1,8 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import com.polyglot.demo.project.interfaces.InterfaceA;
-import com.polyglot.demo.project.interfaces.InterfaceB;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.Assert.assertEquals;
@@ -65,9 +62,6 @@ public class PythonAccessJavaTest {
 
         assertEquals(42, resultInt);
     }
-
-
-
 
 
 

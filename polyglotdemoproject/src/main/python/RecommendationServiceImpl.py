@@ -8,23 +8,18 @@ Product = java.type("com.polyglot.demo.project.entity.Product")
 class RecommendationServiceImpl:
     @staticmethod
     def recommend(product: Product, products: List[Product]) -> Product:
-        # project_vector = np.array(list(map(lambda skill: 1, project.skills())))
+      
+        # product_vector = np.array(product.vector)
+        # similarities = []
         
-        # employee_vectors = {
-        #     employee: to_vector(employee.getSkills(), project.skills())
-        #     for employee in employees
-        # }
+        # for other_product in products:
+        #     other_vector = np.array(other_product.vector)
+        #     cosine_similarity = np.dot(product_vector, other_vector) / (np.linalg.norm(product_vector) * np.linalg.norm(other_vector))
+        #     similarities.append((other_product, cosine_similarity))
         
-        # distances = {
-        #     employee: np.linalg.norm(project_vector - skill_vector)
-        #     for employee, skill_vector in employee_vectors.items()
-        # }
+        # sorted_products = sorted(similarities, key=lambda x: x[1], reverse=True)
         
-        # ordered = dict(sorted(distances.items(), key=lambda distance: distance[1]))
-        recommendedProduct = products[2];
-
-        return recommendedProduct
-
-        
-# def to_vector(employee_skills, searched_skills):
-#     return np.array(list(map(lambda skill: int(skill in employee_skills), searched_skills)))
+        # # Return the most similar product, excluding the product itself
+        # return sorted_products[0][0] if sorted_products else None
+    
+        return products[0]

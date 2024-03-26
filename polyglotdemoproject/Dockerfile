@@ -5,15 +5,17 @@
 
 FROM ubuntu:20.04
 
-# Install GraalVM
+# GraalVM
 RUN apt-get update && apt-get install -y curl tar gzip git build-essential
 RUN curl -L https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-x64_bin.tar.gz | tar -xzC /opt
 
-ENV JAVA_HOME=/opt/graalvm-ce-java21-21.0.2
+ENV JAVA_HOME=/opt/graalvm-community-openjdk-21.0.2+13.1
 ENV PATH=$PATH:$JAVA_HOME/bin
 
+RUN echo $PATH
+RUN echo $JAVA_HOME
 
-# Install maven 
+# maven 
 ARG MAVEN_VERSION=3.8.8
 ARG USER_HOME_DIR="/root"
 ARG BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
@@ -27,23 +29,15 @@ RUN ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
-# Install graalpy
-#RUN curl https://pyenv.run | bash
-#ENV PATH="/root/.pyenv/bin:$PATH"
-
-#RUN pyenv install graalpy-23.1.2
-
-
+# graalpython
 RUN curl -L https://github.com/oracle/graalpython/releases/download/graal-23.1.2/graalpy-community-23.1.2-linux-amd64.tar.gz | tar -xz -C /usr/local
-ENV PATH="/usr/local/graalpy-community-23.1.2/bin:$PATH"
+ENV PATH="/usr/local/graalpy-community-23.1.2-linux-amd64/bin:$PATH"
 
 RUN graalpy -m venv venv
-RUN source venv/bin/activate
-RUN graalpy -m pip install numpy
+RUN . venv/bin/activate && pip install numpy
+RUN . venv/bin/activate && python -c "import numpy; print(numpy.__version__)"
 
-
-
-# Setup spring-application
+# start application
 RUN mkdir -p /polyglot_demo_project
 COPY . .
 EXPOSE 8080

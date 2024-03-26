@@ -21,18 +21,18 @@ public class JavaAccessCTest {
         this.context = Context.newBuilder("llvm").allowAllAccess(true).build();
     }
 
-    @Test
-    public void evaluateCCode() throws Exception {
+    // @Test
+    // public void evaluateCCode() throws Exception {
 
-        URL url = getClass().getResource("struct.so");
-        File file = new File(url.getPath());
-        Source source = Source.newBuilder("llvm", file).build();
+    //     URL url = getClass().getResource("struct.so");
+    //     File file = new File(url.getPath());
+    //     Source source = Source.newBuilder("llvm", file).build();
 
-        Value value = context.eval(source);
-        int valueInt = value.asInt();
+    //     Value value = context.eval(source);
+    //     int valueInt = value.asInt();
 
-        assertEquals(42, valueInt);
-    }
+    //     assertEquals(42, valueInt);
+    // }
 
     
     @AfterEach

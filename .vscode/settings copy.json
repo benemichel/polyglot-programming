@@ -1,12 +1,10 @@
 {
-    "graalvm.home": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
     "graalvm.installations": [
         "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1"
     ],
     "terminal.integrated.env.linux": {
         "GRAALVM_HOME": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1"
     },
-    "java.jdt.ls.java.home": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-21",
@@ -16,7 +14,6 @@
     ],
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "automatic",
-    "java.home": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
     "maven.terminal.customEnv": [
         {
             "environmentVariable": "JAVA_HOME",
@@ -24,5 +21,13 @@
         }
     ],
     "java.debug.settings.onBuildFailureProceed": true,
-    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable"
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable",
+    "terminal.integrated.env.windows": {
+        "GRAALVM_HOME": "C:\\coding_projects\\masterarbeit\\graalvm-jdk-21.0.1+12.1",
+        "JAVA_HOME": "C:\\coding_projects\\masterarbeit\\graalvm-jdk-21.0.1+12.1",
+        "PATH": "C:\\coding_projects\\masterarbeit\\graalvm-jdk-21.0.1+12.1\\bin;${env:PATH}"
+    },
+    "java.jdt.ls.java.home": "C:\\coding_projects\\masterarbeit\\graalvm-jdk-21.0.1+12.1",
+    "graalvm.home": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
+    "java.home": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
 }

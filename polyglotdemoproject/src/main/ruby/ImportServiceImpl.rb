@@ -1,12 +1,11 @@
 class ImportServiceImpl
 
-    def self.find_ean(text)
+    def find_ean(text)
       ean_pattern = /\b\d{13}\b/
       matches = text.scan(ean_pattern)
-      matches.empty? ? "No EAN found" : matches
+      matches.empty? ? "No EAN found" : matches[0]
     end
 
   end
 
-importServiceImpl = ImportServiceImpl.new()  
-Polyglot.export('importServiceImpl', importServiceImpl)
+importServiceImpl = ImportServiceImpl.new()

@@ -1,18 +1,11 @@
 package com.polyglot.demo.project.controller;
 
-import org.graalvm.polyglot.Value;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import org.graalvm.polyglot.Context;
 
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,8 +17,6 @@ import com.polyglot.demo.project.service.RecommendationService;
 
 import groovy.lang.GroovyObject;
 import groovy.util.GroovyScriptEngine;
-import groovy.util.ResourceException;
-import groovy.util.ScriptException;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
@@ -33,9 +24,11 @@ import io.swagger.v3.oas.annotations.Operation;
 public class ProductController {
 
     private RecommendationService recommendationService;
+    private ImportService importService;
 
-    public ProductController(RecommendationService recommendationService) {
+    public ProductController(RecommendationService recommendationService, ImportService importService) {
         this.recommendationService = recommendationService;
+        this.importService = importService;
     }
 
     /**
@@ -62,45 +55,31 @@ public class ProductController {
 
     @Operation(summary = "Find products in import file")
     @GetMapping("/find-in-file")
-    String findInImportFile(ImportService importService) {
+    String findInImportFile() {
         try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
 
-            String filePath = "products.txt";
-            String content = Files.readString(Paths.get(filePath));
-            
-            String fileContent = content;
-            return importService.find_ean(fileContent);
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            InputStream stream = classloader.getResourceAsStream("products.txt");
+
+            String fileContent = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+            String result = importService.find_ean(fileContent);
+
+            return result;
         } catch (Exception exception) {
             return (exception.toString());
         }
 
     }
 
-
-    // @Operation(summary = "Rate a product")
-    // @GetMapping("/rate")
-    // String rateProduct() {
-    //     try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
-    //         Value value = context.eval("python", "4 + 6");
-    //         int valueInt = value.asInt();
-    //         return String.valueOf(valueInt);
-    //     } catch (Exception e) {
-    //         return e.toString();
-
-    //     }
-    // }
-
     @Operation(summary = "Export a product as XML file")
     @GetMapping("/export")
-    String export()
-            throws IOException, ResourceException, ScriptException, InstantiationException, IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    String export() throws Exception {
         Product product = new Product("4006381333934", "Example Product", ProductCategories.CLOTHES);
 
         try {
-            String[] roots = new String[] { "src/main/groovy" };
+            String[] roots = new String[] { "polyglotdemoproject/src/main/groovy" };
             GroovyScriptEngine gse = new GroovyScriptEngine(roots);
-            Class<GroovyObject> productExportServiceClass = gse.loadScriptByName("/ProductExportService.groovy");
+            Class<GroovyObject> productExportServiceClass = gse.loadScriptByName("ProductExportService.groovy");
             GroovyObject productExportService = productExportServiceClass.getDeclaredConstructor().newInstance();
 
             Object xml = productExportService.invokeMethod("createXml", product);

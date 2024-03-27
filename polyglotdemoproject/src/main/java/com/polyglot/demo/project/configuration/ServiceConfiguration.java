@@ -63,11 +63,8 @@ public class ServiceConfiguration {
                 resourceLoader.getResource(rubyPath + "/ImportServiceImpl.rb").getFile()
         ).build();
 
-        context.eval(source);
-
         return context
-                .getBindings("ruby")
-                .getMember("ImportServiceImpl")
+                .eval(source)
                 .as(ImportService.class);
     }
 }

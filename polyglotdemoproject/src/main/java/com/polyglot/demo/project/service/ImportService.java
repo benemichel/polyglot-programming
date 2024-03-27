@@ -5,4 +5,5 @@ public interface ImportService {
     
      public String find_ean(String text);
     
+     public void rubyConstructor();
 }

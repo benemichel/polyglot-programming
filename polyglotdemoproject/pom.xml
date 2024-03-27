@@ -111,6 +111,9 @@
 			<resource>
 				<directory>${project.basedir}/src/main/ruby</directory>
 			</resource> 
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource> 
 		</resources>
 
 		<!-- <plugins>

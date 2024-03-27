@@ -6,7 +6,7 @@ import com.polyglot.demo.project.entity.Product;
 
 public interface RecommendationService {
     
-     public Product recommend(Product product, ArrayList<Product> products);
+    public Product recommend(Product product, ArrayList<Product> products);
 
     public void pythonConstructor();
     

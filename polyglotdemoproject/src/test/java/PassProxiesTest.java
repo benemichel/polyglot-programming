@@ -24,7 +24,7 @@ public class PassProxiesTest {
     }
 
     @Test
-    public void passArrayProxyToJsAndAccessTest() {
+    public void passArrayProxyToJsAndAccess() {
         ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(0);
         list.add(1);
@@ -39,7 +39,7 @@ public class PassProxiesTest {
     }
 
     @Test
-    public void passArrayProxyToJsAndSetTest() {
+    public void passArrayProxyToJsAndSet() {
         ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(0);
         list.add(1);

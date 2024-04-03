@@ -12,7 +12,7 @@ import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
 
-public class JavaAccessCTest {
+public class JavaAccessCppTest {
 
     Context context;
 
@@ -22,9 +22,9 @@ public class JavaAccessCTest {
     }
 
     @Test
-    public void evaluateCCode() throws Exception {
+    public void evaluateCppCode() throws Exception {
 
-        URL url = getClass().getResource("struct.so");
+        URL url = getClass().getResource("MainProcessPayment.so");
         File file = new File(url.getPath());
         Source source = Source.newBuilder("llvm", file).build();
 
@@ -33,7 +33,7 @@ public class JavaAccessCTest {
 
         int valueInt = cpart.execute().asInt();
 
-        assertEquals(42, valueInt);
+        assertEquals(1, valueInt);
     }
 
     

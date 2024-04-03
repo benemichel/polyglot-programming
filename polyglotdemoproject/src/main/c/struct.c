@@ -1,5 +1,3 @@
-#include <graalvm/llvm/polyglot.h>
-
 #include <stdlib.h>
 #include <stdio.h>
 

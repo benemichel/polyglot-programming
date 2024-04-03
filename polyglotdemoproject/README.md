@@ -26,6 +26,16 @@ pip -V
 mvn -Dtest=UserTest clean test
 [] run all tests with mvn test
 
+# Install graalpython 
+From: https://github.com/oracle/graalpython/blob/master/docs/user/Python-Runtime.md
+
+
+Alternatively, you can download a compressed GraalPy installation file from GitHub releases.
+
+Find the download that matches the pattern graalpy-XX.Y.Z-linux-amd64.tar.gz or graalpy-XX.Y.Z-linux-aarch64.tar.gz (depending on your platform) and download.
+Uncompress the file and update your PATH environment variable to include to the graalpy-XX.Y.Z-linux-amd64/bin (or graalpy-XX.Y.Z-linux-aarch64/bin) directory.
+
+``export PATH=path/to/graalpython/bin:$PATH``
 
 # Docker
 

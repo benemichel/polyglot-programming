@@ -1,7 +1,11 @@
 import org.junit.jupiter.api.Test;
 
+import com.polyglot.demo.project.entity.Product;
+import com.polyglot.demo.project.enums.ProductCategories;
 import com.polyglot.demo.project.interfaces.InterfaceA;
 import com.polyglot.demo.project.interfaces.InterfaceB;
+import com.polyglot.demo.project.service.ImportService;
+import com.polyglot.demo.project.service.RecommendationService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
@@ -9,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
@@ -66,6 +71,35 @@ public class JavaAccessPythonTest {
 
         assertEquals(2, result);
 
+    }
+
+    @Test
+    public void callRecommendationServiceImpl() throws Exception {
+        URL url = getClass().getResource("RecommendationServiceImpl.py");
+        File file = new File(url.getPath());
+        Source source = Source.newBuilder("python", file).build();
+
+        context.eval(source);
+
+        RecommendationService service = context
+                .getBindings("python")
+                .getMember("RecommendationServiceImpl")
+                .as(RecommendationService.class);
+
+        Product shoes = new Product("123456789", "shoes", ProductCategories.CLOTHES);
+        Product tv = new Product("123456789", "tv", ProductCategories.ELECTRONICS);
+        Product shirt = new Product("123456789", "shirt", ProductCategories.CLOTHES);
+        Product desk = new Product("123456789", "desk", ProductCategories.FURNITURE);
+        ArrayList<Product> products = new ArrayList<>();
+
+        products.add(shoes);
+        products.add(tv);
+        products.add(shirt);
+        products.add(desk);
+
+        Product recommendedProduct = service.recommend(shoes, products);
+
+        assertEquals(shoes, recommendedProduct);
     }
 
     interface PythonService {

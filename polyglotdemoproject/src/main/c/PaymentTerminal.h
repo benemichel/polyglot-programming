@@ -4,7 +4,7 @@
 class PaymentTerminal
 {
     public:
-        int processPayment();
+        int processPayment(int id);
 };
 
 #endif

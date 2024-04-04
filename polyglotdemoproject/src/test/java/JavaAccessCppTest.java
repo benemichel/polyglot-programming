@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
@@ -22,18 +23,20 @@ public class JavaAccessCppTest {
     }
 
     @Test
-    public void evaluateCppCode() throws Exception {
+    public void evaluateCppCodeWithArguments() throws Exception {
 
+        String[] arguments = new String[] {"42"};
+
+        Context context = Context.newBuilder().arguments("llvm", arguments).allowAllAccess(true).build();
         URL url = getClass().getResource("MainProcessPayment.so");
         File file = new File(url.getPath());
+        
         Source source = Source.newBuilder("llvm", file).build();
 
-        context.eval(source);
-        Value cpart = context.getBindings("llvm").getMember("main");
-
-        int valueInt = cpart.execute().asInt();
-
-        assertEquals(1, valueInt);
+        Value cpart = context.eval(source);
+        Value result = cpart.execute();
+      
+        assertEquals(43, result.asInt());
     }
 
     

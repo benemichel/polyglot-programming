@@ -1,6 +1,6 @@
 #include "PaymentTerminal.h"
 
-int PaymentTerminal::processPayment()
+int PaymentTerminal::processPayment(int id)
 {
-    return 1;
+    return id + 1;
 }

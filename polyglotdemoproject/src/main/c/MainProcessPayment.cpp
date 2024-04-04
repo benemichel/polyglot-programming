@@ -1,10 +1,13 @@
+#include <cstdlib>
 #include "PaymentTerminal.h"
 
-int processPayment() {
+int processPayment(int id) {
     PaymentTerminal terminal;
-    return terminal.processPayment();
+    return terminal.processPayment(id);
 }
 
-int main() {
-    return processPayment();
+int main(int argc, char *argv[]) {
+    int id = std::atoi(argv[1]);
+    
+    return processPayment(id);
 }

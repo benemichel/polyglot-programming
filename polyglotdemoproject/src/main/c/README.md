@@ -5,3 +5,8 @@ See: https://www.graalvm.org/latest/reference-manual/llvm/Compiling/
 ``
 $LLVM_TOOLCHAIN/clang++  MainProcessPayment.cpp PaymentTerminal.cpp -o MainProcessPayment.so
 ``
+
+to include polyglot.h run
+``
+$LLVM_TOOLCHAIN/clang -shared example.c -lpolyglot-mock -o example.so
+``

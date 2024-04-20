@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "src"
+		}
+	],
+	"settings": {
+		"terminal.integrated.env.linux": {
+			"GRAALVM_HOME": "/home/benedikt/masterarbeit/graalvm/graalvm-jdk-21.0.1+12.1",
+			"PYTHON_PATH": "/home/benedikt/masterarbeit/graalpy-community-23.1.2-linux-amd64/bin"
+		},
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.debug.settings.onBuildFailureProceed": true
+	}
+}

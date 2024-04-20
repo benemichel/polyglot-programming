@@ -1,3 +1,5 @@
+package com.polyglot.demo.project;
+
 import org.junit.jupiter.api.Test;
 
 import com.polyglot.demo.project.service.ImportService;
@@ -14,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
-import org.graalvm.polyglot.Value;
 
 public class ImportServiceTest {
     Context context;

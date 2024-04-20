@@ -1,3 +1,5 @@
+package com.polyglot.demo.project;
+
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +25,8 @@ public class JavaAccessRubyTest {
 
     @Test
     public void callPrivateMethodDoesNotThrow() throws Exception {
+        Context context = Context.newBuilder().allowAllAccess(false).build();
+
         URL url = getClass().getResource("withPrivateMethod.rb");
         File file = new File(url.getPath());
         Source source = Source.newBuilder("ruby", file).build();

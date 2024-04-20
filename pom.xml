@@ -103,6 +103,9 @@
 				<directory>${project.basedir}/src/main/javascript</directory>
 			</resource> 
 			<resource>
+				<directory>${project.basedir}/src/main/python/com/polyglot/demo/project</directory>
+			</resource> 
+			<resource>
 				<directory>${project.basedir}/src/main/python</directory>
 			</resource> 
 			<resource>
@@ -115,6 +118,17 @@
 				<directory>${project.basedir}/src/main/resources</directory>
 			</resource> 
 		</resources>
+
+		<!-- <plugins>
+		<plugin>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>exec-maven-plugin</artifactId>
+			<version>3.1.1</version>
+			<configuration>
+				<mainClass>com.polyglot.demo.project.PolyglotDemoProject</mainClass>
+			</configuration>
+		</plugin>
+	</plugins> -->
 
 		<!-- <plugins>
 			<plugin>

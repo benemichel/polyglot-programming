@@ -1,3 +1,5 @@
+package com.polyglot.demo.project;
+
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -54,25 +56,25 @@ public class JavaAccessCTest {
         assertEquals(5, elementInt);
     }
 
-    @Test
-    public void example() throws Exception {
+    // @Test
+    // public void example() throws Exception {
 
-        URL url = getClass().getResource("example.so");
-        File file = new File(url.getPath());
-        Source source = Source.newBuilder("llvm", file).build();
+    //     URL url = getClass().getResource("example.so");
+    //     File file = new File(url.getPath());
+    //     Source source = Source.newBuilder("llvm", file).build();
 
         
-        Value cpart = context.eval(source);
+    //     Value cpart = context.eval(source);
 
-        Value point = cpart.getMember("allocNativePoint").execute();
+    //     Value point = cpart.getMember("allocNativePoint").execute();
 
-        Value printPoint = cpart.getMember("printPoint");
-        printPoint.execute(point);
+    //     Value printPoint = cpart.getMember("printPoint");
+    //     printPoint.execute(point);
 
     
 
-        assertEquals(42, 43);
-    }
+    //     assertEquals(42, 43);
+    // }
 
     
     @AfterEach

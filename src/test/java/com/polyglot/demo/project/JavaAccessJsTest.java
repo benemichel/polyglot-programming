@@ -1,3 +1,5 @@
+package com.polyglot.demo.project;
+
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.BeforeEach;

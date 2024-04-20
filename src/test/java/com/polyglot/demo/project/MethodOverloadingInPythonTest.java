@@ -1,6 +1,8 @@
+package com.polyglot.demo.project;
+
 import org.junit.jupiter.api.Test;
 
-import com.polyglot.demo.project.interfaces.InterfaceB;
+
 import com.polyglot.demo.project.interfaces.WithOverloadedMethod;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -8,9 +10,8 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
+
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;

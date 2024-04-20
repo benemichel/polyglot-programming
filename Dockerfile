@@ -34,7 +34,8 @@ RUN curl -L https://github.com/oracle/graalpython/releases/download/graal-23.1.2
 ENV PATH="/usr/local/graalpy-community-23.1.2-linux-amd64/bin:$PATH"
 
 RUN graalpy -m venv venv
-RUN . venv/bin/activate && pip install numpy
+# Every RUN line in the Dockerfile is a different process. Running activate in a separate RUN has no effect on future RUN calls
+RUN . venv/bin/activate && pip install numpy 
 RUN . venv/bin/activate && python -c "import numpy; print(numpy.__version__)"
 
 # start application

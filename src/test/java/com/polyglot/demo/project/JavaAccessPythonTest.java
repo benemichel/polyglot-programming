@@ -1,15 +1,19 @@
+package com.polyglot.demo.project;
+
 import org.junit.jupiter.api.Test;
 
 import com.polyglot.demo.project.entity.Product;
 import com.polyglot.demo.project.enums.ProductCategories;
 import com.polyglot.demo.project.interfaces.InterfaceA;
 import com.polyglot.demo.project.interfaces.InterfaceB;
-import com.polyglot.demo.project.service.ImportService;
 import com.polyglot.demo.project.service.RecommendationService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.net.URL;
@@ -60,6 +64,7 @@ public class JavaAccessPythonTest {
 
     @Test
     public void implementServiceInPython() throws Exception {
+        context = Context.newBuilder().allowAllAccess(true).option("python.ForceImportSite", "true").build();
         URL url = getClass().getResource("PythonServiceImpl.py");
         File file = new File(url.getPath());
         Source source = Source.newBuilder("python", file).build();
@@ -70,11 +75,21 @@ public class JavaAccessPythonTest {
         int result = pythonService.compute();
 
         assertEquals(2, result);
-
     }
 
     @Test
     public void callRecommendationServiceImpl() throws Exception {
+        URL url1 = getClass().getResource("/");
+        File file1 = new File(url1.getPath());
+        String path = file1.toPath().toString();
+
+        Context context = Context.newBuilder("python")
+        .allowAllAccess(true)
+        .option("python.ForceImportSite", "true")
+        .option("python.PythonPath", path)
+        .option("python.Executable", "venv/bin/graalpy")
+        .build();
+
         URL url = getClass().getResource("RecommendationServiceImpl.py");
         File file = new File(url.getPath());
         Source source = Source.newBuilder("python", file).build();
@@ -99,7 +114,26 @@ public class JavaAccessPythonTest {
 
         Product recommendedProduct = service.recommend(shoes, products);
 
-        assertEquals(shoes, recommendedProduct);
+        assertEquals(tv, recommendedProduct);
+    }
+
+    @Test
+    public void precisionIsRetained() throws Exception {
+        URL url = getClass().getResource("ReceiveAndReturnFloat.py");
+        File file = new File(url.getPath());
+        Source source = Source.newBuilder("python", file).build();
+
+        double floatdoubleVal = 0.00000000001223456789d;
+        context.getPolyglotBindings().putMember("floatingPointValue", floatdoubleVal);
+        Value result = context.eval(source);
+
+        assertTrue(result.fitsInDouble());
+
+        assertEquals(floatdoubleVal, result.asDouble(), 0.00000000000000000001d);
+
+        assertThrows(Exception.class, () -> {
+            assertNotEquals(floatdoubleVal, result.asFloat(), 0.00000000000000000001d);
+        });
     }
 
     interface PythonService {

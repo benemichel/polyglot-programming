@@ -9,7 +9,14 @@
             "name": "PolyglotDemoProject",
             "request": "launch",
             "mainClass": "com.polyglot.demo.project.PolyglotDemoProject",
-            "projectName": "polyglotdemoproject"
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "PolyglotDemoProject",
+            "request": "launch",
+            "mainClass": "com.polyglot.demo.project.PolyglotDemoProject",
+            "projectName": "PolyglotDemoProject"
         },
         {
             "type": "graalvm",

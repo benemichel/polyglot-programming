@@ -1,3 +1,5 @@
+package com.polyglot.demo.project;
+
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;

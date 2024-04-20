@@ -1,5 +1,6 @@
+package com.polyglot.demo.project;
+
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.util.ArrayList;
 

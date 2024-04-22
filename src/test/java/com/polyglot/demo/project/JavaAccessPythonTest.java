@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import com.polyglot.demo.project.entity.Product;
 import com.polyglot.demo.project.enums.ProductCategories;
+import com.polyglot.demo.project.enums.ProductTags;
 import com.polyglot.demo.project.interfaces.InterfaceA;
 import com.polyglot.demo.project.interfaces.InterfaceB;
 import com.polyglot.demo.project.service.RecommendationService;
@@ -18,6 +19,8 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.graalvm.polyglot.Context;
 import org.graalvm.polyglot.Source;
@@ -101,10 +104,15 @@ public class JavaAccessPythonTest {
                 .getMember("RecommendationServiceImpl")
                 .as(RecommendationService.class);
 
-        Product shoes = new Product("123456789", "shoes", ProductCategories.CLOTHES);
-        Product tv = new Product("123456789", "tv", ProductCategories.ELECTRONICS);
-        Product shirt = new Product("123456789", "shirt", ProductCategories.CLOTHES);
-        Product desk = new Product("123456789", "desk", ProductCategories.FURNITURE);
+        List<ProductTags> shoeTags= Arrays.asList(ProductTags.FASHION, ProductTags.SALE, ProductTags.SUMMER);
+        List<ProductTags> tvTags= Arrays.asList(ProductTags.SALE, ProductTags.ELECTRONICS);
+        List<ProductTags> shirtTags= Arrays.asList(ProductTags.FASHION, ProductTags.SUMMER);
+        List<ProductTags> deskTags= Arrays.asList( ProductTags.SALE);
+
+        Product shoes = new Product("123456789", "shoes", ProductCategories.CLOTHES, shoeTags);
+        Product tv = new Product("123456789", "tv", ProductCategories.ELECTRONICS, tvTags);
+        Product shirt = new Product("123456789", "shirt", ProductCategories.CLOTHES, shirtTags);
+        Product desk = new Product("123456789", "desk", ProductCategories.FURNITURE, deskTags);
         ArrayList<Product> products = new ArrayList<>();
 
         products.add(shoes);
@@ -114,7 +122,7 @@ public class JavaAccessPythonTest {
 
         Product recommendedProduct = service.recommend(shoes, products);
 
-        assertEquals(tv, recommendedProduct);
+        assertEquals(shirt, recommendedProduct);
     }
 
     @Test

@@ -1,26 +1,42 @@
-import site
+#import site
 import java
 import numpy as np
 from typing import List
 
 Product = java.type("com.polyglot.demo.project.entity.Product")
-
+ProductTags = java.type("com.polyglot.demo.project.enums.ProductTags")
 
 class RecommendationServiceImpl:
     @staticmethod
     def recommend(product: Product, products: List[Product]) -> Product:
 
-        # product_vector = np.array(product.vector)
-        # similarities = []
+        product_vector = {
+            "product": product,
+            "vector": to_vector(product.getTags())
+        }
         
-        #for other_product in products:
-        #    other_vector = np.array(other_product.vector)
-        #     cosine_similarity = np.dot(product_vector, other_vector) / (np.linalg.norm(product_vector) * np.linalg.norm(other_vector))
-        #     similarities.append((other_product, cosine_similarity))
+        product_vectors = [
+            {"product": product, 
+            "vector": to_vector(product.getTags())}
+            for product in products
+        ]
         
-        # sorted_products = sorted(similarities, key=lambda x: x[1], reverse=True)
-        
-        # # Return the most similar product, excluding the product itself
-        # return sorted_products[0][0] if sorted_products else None
+        for other_product_vector in product_vectors:
+            other_product_vector["similarity"] = cosine_similarity(product_vector["vector"], other_product_vector["vector"])
+       
+        product_vectors.sort(key=lambda item: item.get("similarity"), reverse=True)
+
+        return product_vectors[1]["product"]
     
-        return products[1]
+
+def cosine_similarity(vector1, vector2) -> float:
+    dot_product = np.dot(vector1, vector2)
+    norm1 = np.linalg.norm(vector1)
+    norm2 = np.linalg.norm(vector2)
+
+    return dot_product / (norm1 * norm2)
+
+def to_vector(tags):
+    all_tags = [ProductTags.NEW, ProductTags.SALE, ProductTags.ELECTRONICS, ProductTags.MOBILE, ProductTags.SUMMER,ProductTags.WINTER,ProductTags.FASHION]
+    
+    return np.array(list(map(lambda tag: int(tag in tags), all_tags)))

@@ -1,27 +1,24 @@
-import spock.lang.*
+import spock.lang.Specification
 
 import org.graalvm.polyglot.Context;
-import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
-
 
 class JavaAccessJsSpec extends Specification {
 
-    Context context;
+    private Context context
 
     def void setup() {
-        context = Context.newBuilder().allowAllAccess(true).build();
+        context = Context.newBuilder().allowAllAccess(true).build()
     }
 
     def "semantics of null and undefined from js are lost in java"() {
         given:
 
         when:
-        Value undefinedJs = context.eval("js", "let foo");
-        Value nullJs = context.eval("js", "foo");
+        Value undefinedJs = context.eval('js', 'let foo; foo')
+        Value nullJs = context.eval('js', 'foo')
 
         then:
-        undefinedJs == nullJs;
-        true == false;
+        undefinedJs == nullJs
     }
 }

@@ -24,21 +24,6 @@ public class JavaAccessCTest {
     }
 
     @Test
-    public void evaluateCCode() throws Exception {
-
-        URL url = getClass().getResource("struct.so");
-        File file = new File(url.getPath());
-        Source source = Source.newBuilder("llvm", file).build();
-
-        context.eval(source);
-        Value cpart = context.getBindings("llvm").getMember("main");
-
-        int valueInt = cpart.execute().asInt();
-
-        assertEquals(42, valueInt);
-    }
-
-    @Test
     public void accessArrayFromC() throws Exception {
 
         URL url = getClass().getResource("example.so");

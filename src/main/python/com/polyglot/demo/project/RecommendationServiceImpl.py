@@ -6,6 +6,7 @@ from typing import List
 Product = java.type("com.polyglot.demo.project.entity.Product")
 ProductTags = java.type("com.polyglot.demo.project.enums.ProductTags")
 
+
 class RecommendationServiceImpl:
     @staticmethod
     def recommend(product: Product, products: List[Product]) -> Product:
@@ -37,6 +38,5 @@ def cosine_similarity(vector1, vector2) -> float:
     return dot_product / (norm1 * norm2)
 
 def to_vector(tags):
-    all_tags = [ProductTags.NEW, ProductTags.SALE, ProductTags.ELECTRONICS, ProductTags.MOBILE, ProductTags.SUMMER,ProductTags.WINTER,ProductTags.FASHION]
-    
+    all_tags = list(ProductTags.values())
     return np.array(list(map(lambda tag: int(tag in tags), all_tags)))

@@ -3,6 +3,10 @@ package com.polyglot.demo.project.controller;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.graalvm.polyglot.Context;
 
@@ -11,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.polyglot.demo.project.entity.Product;
-import com.polyglot.demo.project.enums.ProductCategories;
+import com.polyglot.demo.project.enums.ProductTags;
 import com.polyglot.demo.project.service.ImportService;
 import com.polyglot.demo.project.service.RecommendationService;
 
@@ -31,17 +35,22 @@ public class ProductController {
         this.importService = importService;
     }
 
-    /**
-     * checked: 04.03.2024, TODO: use numpy!
-     */
+   
     @Operation(summary = "Recommend a product")
     @GetMapping("/recommend")
     String recommendProduct() {
 
-        Product shoes = new Product("123456789", "shoes", ProductCategories.CLOTHES);
-        Product tv = new Product("123456789", "tv", ProductCategories.ELECTRONICS);
-        Product shirt = new Product("123456789", "shirt", ProductCategories.CLOTHES);
-        Product desk = new Product("123456789", "desk", ProductCategories.FURNITURE);
+        List<ProductTags> shoeTags= Arrays.asList(ProductTags.FASHION, ProductTags.SALE, ProductTags.SUMMER);
+        List<ProductTags> tvTags= Arrays.asList(ProductTags.SALE, ProductTags.ELECTRONICS);
+        List<ProductTags> shirtTags= Arrays.asList(ProductTags.FASHION, ProductTags.SUMMER);
+        List<ProductTags> deskTags= Arrays.asList( ProductTags.SALE);
+
+        Product shoes = new Product("123456789", "shoes", shoeTags);
+        Product tv = new Product("123456789", "tv", tvTags);
+        Product shirt = new Product("123456789", "shirt", shirtTags);
+        Product desk = new Product("123456789", "desk", deskTags);
+
+    
         ArrayList<Product> products = new ArrayList<>();
 
         products.add(shoes);
@@ -53,11 +62,10 @@ public class ProductController {
         return recommendedProduct.getName();
     }
 
-    @Operation(summary = "Find products in import file")
-    @GetMapping("/find-in-file")
-    String findInImportFile() {
-        try (Context context = Context.newBuilder().allowAllAccess(true).build()) {
-
+    @Operation(summary = "Find products in import file with Ruby")
+    @GetMapping("/find-in-file-ruby")
+    String findInImportFileRuby() {
+        try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             InputStream stream = classloader.getResourceAsStream("products.txt");
 
@@ -71,10 +79,35 @@ public class ProductController {
 
     }
 
+    @Operation(summary = "Find products in import file with Java")
+    @GetMapping("/find-in-file-java")
+    String findInImportFileJava() {
+        
+
+        try {
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            InputStream stream = classloader.getResourceAsStream("products.txt");
+
+            String fileContent = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+            String eanPattern = "\\b\\d{13}\\b";
+            Pattern pattern = Pattern.compile(eanPattern);
+            Matcher matcher = pattern.matcher(fileContent);
+
+            Boolean found = matcher.find();
+
+            String result = found ? matcher.group(0) : "No EAN found";
+           
+            return result;
+        } catch (Exception exception) {
+            return (exception.toString());
+        }
+    }
+
     @Operation(summary = "Export a product as XML file")
     @GetMapping("/export")
     String export() throws Exception {
-        Product product = new Product("4006381333934", "Example Product", ProductCategories.CLOTHES);
+        List<ProductTags> tags= Arrays.asList( ProductTags.SALE);
+        Product product = new Product("4006381333934", "Example Product", tags);
 
         try {
             String[] roots = new String[] { "polyglotdemoproject/src/main/groovy" };

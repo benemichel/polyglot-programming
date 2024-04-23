@@ -109,10 +109,10 @@ public class JavaAccessPythonTest {
         List<ProductTags> shirtTags= Arrays.asList(ProductTags.FASHION, ProductTags.SUMMER);
         List<ProductTags> deskTags= Arrays.asList( ProductTags.SALE);
 
-        Product shoes = new Product("123456789", "shoes", ProductCategories.CLOTHES, shoeTags);
-        Product tv = new Product("123456789", "tv", ProductCategories.ELECTRONICS, tvTags);
-        Product shirt = new Product("123456789", "shirt", ProductCategories.CLOTHES, shirtTags);
-        Product desk = new Product("123456789", "desk", ProductCategories.FURNITURE, deskTags);
+        Product shoes = new Product("123456789", "shoes",  shoeTags);
+        Product tv = new Product("123456789", "tv",  tvTags);
+        Product shirt = new Product("123456789", "shirt",  shirtTags);
+        Product desk = new Product("123456789", "desk",  deskTags);
         ArrayList<Product> products = new ArrayList<>();
 
         products.add(shoes);

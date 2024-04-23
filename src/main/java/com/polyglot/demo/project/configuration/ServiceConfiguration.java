@@ -38,6 +38,7 @@ public class ServiceConfiguration {
                             .toPath()
                             .toString()
             )
+            .option("python.Executable", "venv/bin/graalpy")
             .build();
 
         Source source = Source.newBuilder("python",

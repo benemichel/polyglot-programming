@@ -23,8 +23,8 @@ pip -V
 
 
 # run tests
-mvn -Dtest=UserTest clean test
-[] run all tests with mvn test
+run ``mvn clean test``
+
 
 # Install graalpython 
 From: https://github.com/oracle/graalpython/blob/master/docs/user/Python-Runtime.md

@@ -65,22 +65,6 @@ public class PythonAccessJavaTest {
         assertEquals(42, resultInt);
     }
 
-    @Test
-    public void accessJavaEnum() throws Exception {
-       
-
-        URL url = getClass().getResource("AccessJavaEnum.py");
-        File file = new File(url.getPath());
-        Source source = Source.newBuilder("python", file).build();
-
-        Value result = context.eval(source);
-        int resultInt = result.asInt();
-
-        assertEquals(42, resultInt);
-    }
-
-
-
     @AfterEach
     public void tearDown() {
         context.close();

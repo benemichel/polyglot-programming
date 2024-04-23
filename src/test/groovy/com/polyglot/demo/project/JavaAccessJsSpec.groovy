@@ -5,7 +5,7 @@ import org.graalvm.polyglot.Source;
 import org.graalvm.polyglot.Value;
 
 
-class JavaAccessJsSpecification extends Specification {
+class JavaAccessJsSpec extends Specification {
 
     Context context;
 

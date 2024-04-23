@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.2.1</version>
-		<relativePath/>
+		<relativePath />
 	</parent>
 
-    <groupId>com.polyglot.demo.project</groupId>
-    <artifactId>polyglotdemoproject</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <description>polyglot programming demo project with GraaalVM</description> 
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+	<groupId>com.polyglot.demo.project</groupId>
+	<artifactId>polyglotdemoproject</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<description>polyglot programming demo project with GraaalVM</description>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 
-        <java.version>21</java.version>
-        <graalvm.version>23.1.1</graalvm.version>
-    </properties>
+		<java.version>21</java.version>
+		<graalvm.version>23.1.1</graalvm.version>
+	</properties>
 
-    <dependencies>
-        <dependency>
+	<dependencies>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
@@ -34,7 +34,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-        <dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -92,38 +92,45 @@
 			<artifactId>groovy-all</artifactId>
 			<version>4.0.4</version>
 			<type>pom</type>
-   		 </dependency>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>1.7.0</version>
+			<scope>test</scope>
+		</dependency>
 
-    </dependencies>
+	</dependencies>
 
-    
+
 	<build>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/javascript</directory>
-			</resource> 
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/python/com/polyglot/demo/project</directory>
-			</resource> 
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/python</directory>
-			</resource> 
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/native</directory>
-			</resource> 
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/native/com/polyglot/demo/project</directory>
-			</resource> 
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/ruby/com/polyglot/demo/project</directory>
-			</resource> 
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/ruby</directory>
-			</resource> 
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
-			</resource> 
+			</resource>
 		</resources>
+
 
 		<!-- <plugins>
 		<plugin>
@@ -134,14 +141,14 @@
 				<mainClass>com.polyglot.demo.project.PolyglotDemoProject</mainClass>
 			</configuration>
 		</plugin>
-	</plugins> -->
+	-->
+		<plugins>
 
-		<!-- <plugins>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			< enables maven to compile Groovy code >
+			< enables maven to compile Groovy code -->
 			<plugin>
 				<groupId>org.codehaus.gmavenplus</groupId>
 				<artifactId>gmavenplus-plugin</artifactId>
@@ -149,15 +156,15 @@
 				<executions>
 					<execution>
 						<goals>
-							< <goal>compile</goal> >
-							<goal>compileTests</goal>
+                            <goal>compile</goal>
+                            <goal>compileTests</goal>
 						</goals>
 					</execution>
            		 </executions>
            		 <configuration>
 					<testSources>
 						<testSource>
-							<directory>${project.basedir}/src/test/groovy</directory>
+							<directory>src/test</directory>
 							<includes>
 								<include>**/*.groovy</include>
 							</includes>
@@ -166,18 +173,19 @@
            		</configuration>
 			</plugin>
 			<plugin>
-			< ensure Maven’s test runner executes files ending in *Spec 
+				<!-->
+				ensure Maven’s test runner executes files ending in *Spec 
 				Surefire plugin is called implicitly by the Maven life cycle whenever the test goal is executed
-				>
+		-->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.2</version>
 				<configuration>
-					<testSourceDirectory>${project.basedir}/src/test/</testSourceDirectory>
-                	<includes>
-                   		 <include>groovy/**/*Spec.groovy</include>
-						 <include>java/**/Test*.java</include>
-                	</includes>
+					<!-- <testSourceDirectory>src/test</testSourceDirectory> -->
+					<includes>
+						<include>**/*Spec.*</include>
+						<include>**/*Test.*</include>
+					</includes>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -187,8 +195,8 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-		</plugins> -->
-		
+		</plugins>
+
 	</build>
 
 </project>

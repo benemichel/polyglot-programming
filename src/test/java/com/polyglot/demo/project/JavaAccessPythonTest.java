@@ -3,7 +3,6 @@ package com.polyglot.demo.project;
 import org.junit.jupiter.api.Test;
 
 import com.polyglot.demo.project.entity.Product;
-import com.polyglot.demo.project.enums.ProductCategories;
 import com.polyglot.demo.project.enums.ProductTags;
 import com.polyglot.demo.project.interfaces.InterfaceA;
 import com.polyglot.demo.project.interfaces.InterfaceB;

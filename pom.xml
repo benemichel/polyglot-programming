@@ -112,6 +112,12 @@
 				<directory>${project.basedir}/src/main/native</directory>
 			</resource> 
 			<resource>
+				<directory>${project.basedir}/src/main/native/com/polyglot/demo/project</directory>
+			</resource> 
+			<resource>
+				<directory>${project.basedir}/src/main/ruby/com/polyglot/demo/project</directory>
+			</resource> 
+			<resource>
 				<directory>${project.basedir}/src/main/ruby</directory>
 			</resource> 
 			<resource>

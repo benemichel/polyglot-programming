@@ -30,9 +30,7 @@ public class JavaAccessCTest {
         File file = new File(url.getPath());
         Source source = Source.newBuilder("llvm", file).build();
 
-        
         Value cpart = context.eval(source);
-
         Value array = cpart.getMember("allocNativeArray").execute();
 
         Value element = array.getArrayElement(4);
@@ -41,25 +39,8 @@ public class JavaAccessCTest {
         assertEquals(5, elementInt);
     }
 
-    // @Test
-    // public void example() throws Exception {
-
-    //     URL url = getClass().getResource("example.so");
-    //     File file = new File(url.getPath());
-    //     Source source = Source.newBuilder("llvm", file).build();
-
-        
-    //     Value cpart = context.eval(source);
-
-    //     Value point = cpart.getMember("allocNativePoint").execute();
-
-    //     Value printPoint = cpart.getMember("printPoint");
-    //     printPoint.execute(point);
-
     
 
-    //     assertEquals(42, 43);
-    // }
 
     
     @AfterEach

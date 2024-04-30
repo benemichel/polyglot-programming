@@ -1,50 +1,25 @@
-# Project setup
+# Project
+Das vorliegende Projekt besteht als einzelnen Testfällen und einer polyglotten Beispielappliaktion.
 
+# Setup
+Zum Ausführen der Testfälle und der Beispielapplikation wird Java und Docker benötigt.
 
-# Tests
-Die erstellten Tests dokumentieren die in Kapitel "Polyglotte Programmierung auf der GraalVM" dargestellten Funktionen.
+# Testfälle
+Die Testfälle dienen der Verifizierung der in der Abschlussarbeit aufgezeigten Anwendungsfälle und MEchanismen der polyglotten Programmierung mit GraalVM.
 
-# Spring Applikation/Swagger
-https://springdoc.org/#Introduction
+Die Testfälle werden mit folgendem Befehl ausgeführt:
 
-http://localhost:8080/v3/api-docs
+``mvn clean test``
+
+# Polyglotte Beispielapplikation
+Die Beispielapplikation ist mithilfe von Docker containerisiert. Um sie zu starten, muss folgender Befehl ausgeführt werden:
+
+``docker-compose up``
+
+Die Applikation is daraufhin über eine lokale Webseite erreichbar:
 
 http://localhost:8080/swagger-ui/index.html
 
+Die beigefügten Groovy Testfälle werden mit folgendem Befehl ausgeführt:
 
-https://github.com/oracle/graalpython/issues/104
-
-graalpy -m venv venv
-source venv/bin/activate
-graalpy
->>> print("Hello World!")
-
-pip -V
-
-
-# run tests
-run Java tests: ``mvn clean test``
-
-run Groovy tests: ``mvn -Dtest=JavaRecommendationServiceImplSpec clean test``
-
-# Install graalpython 
-From: https://github.com/oracle/graalpython/blob/master/docs/user/Python-Runtime.md
-
-
-Alternatively, you can download a compressed GraalPy installation file from GitHub releases.
-
-Find the download that matches the pattern graalpy-XX.Y.Z-linux-amd64.tar.gz or graalpy-XX.Y.Z-linux-aarch64.tar.gz (depending on your platform) and download.
-Uncompress the file and update your PATH environment variable to include to the graalpy-XX.Y.Z-linux-amd64/bin (or graalpy-XX.Y.Z-linux-aarch64/bin) directory.
-
-``export PATH=path/to/graalpython/bin:$PATH``
-
-# Docker
-
-To check the version of GraalVM and its installed location, run the env command from the Bash prompt:
-
- ``env``
-The output shows the environment variable JAVA_HOME pointing to the installed GraalVM version and location.
-
-To check the Java version, run:
-
- ``java -version``
+``mvn -Dtest=JavaRecommendationServiceImplSpec clean test``

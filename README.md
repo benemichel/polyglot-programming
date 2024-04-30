@@ -23,8 +23,9 @@ pip -V
 
 
 # run tests
-run ``mvn clean test``
+run Java tests: ``mvn clean test``
 
+run Groovy tests: ``mvn -Dtest=JavaRecommendationServiceImplSpec clean test``
 
 # Install graalpython 
 From: https://github.com/oracle/graalpython/blob/master/docs/user/Python-Runtime.md

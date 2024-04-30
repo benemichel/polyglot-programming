@@ -110,7 +110,7 @@ public class ProductController {
         Product product = new Product("4006381333934", "Example Product", tags);
 
         try {
-            String[] roots = new String[] { "polyglotdemoproject/src/main/groovy" };
+            String[] roots = new String[] { "src/main/groovy/" };
             GroovyScriptEngine gse = new GroovyScriptEngine(roots);
             Class<GroovyObject> productExportServiceClass = gse.loadScriptByName("ProductExportService.groovy");
             GroovyObject productExportService = productExportServiceClass.getDeclaredConstructor().newInstance();

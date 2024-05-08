@@ -1,7 +1,5 @@
 package com.polyglot.demo.project.interfaces;
 
-import java.util.ArrayList;
-
 public interface WithOverloadedMethod {
 
     public String concat();

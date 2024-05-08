@@ -8,7 +8,6 @@ public class Product {
     private int rating;
     private String ean13;
     private String name;
-    private float netPrice;
     private List<ProductTags> tags;
     private int color;
 
